@@ -711,3 +711,51 @@ body {
     right: 0;
   }
 }
+/* ===================================================
+   TEMA BUTONU & MOBİL MENÜ ÇAKIŞMA DÜZELTMELERİ
+   =================================================== */
+
+/* 1. Tema Değiştirme (Güneş/Ay) İkonunu Ortala */
+.theme-toggle,
+#theme-toggle,
+.theme-btn,
+button.theme-toggle {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 !important;
+  line-height: 1 !important;
+}
+
+.theme-toggle svg,
+#theme-toggle svg,
+.theme-btn svg {
+  display: block !important;
+  margin: auto !important;
+}
+
+/* 2. Mobil Ekranda Menü Üst Boşluğu ve Çakışmayı Önleme */
+@media (max-width: 768px) {
+  /* Header katmanını içeriğin üstünde tut */
+  .site-header,
+  header {
+    position: relative;
+    z-index: 1000 !important;
+  }
+
+  /* Menü açıldığında veya mobilde ana başlıkla çakışmaması için Hero alanına nefes payı ver */
+  .hero-section,
+  .hero,
+  main section:first-of-type {
+    padding-top: 5rem !important;
+    position: relative;
+    z-index: 1 !important;
+  }
+
+  /* Menü listesi arka planını opaklaştırarak alttaki yazıları göstermesini engelle */
+  .nav-menu,
+  .nav-links,
+  nav ul {
+    background-color: #0b1120 !important; /* Koyu arka plan */
+  }
+}
