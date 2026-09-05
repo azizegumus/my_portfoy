@@ -712,9 +712,70 @@ body {
   }
 }
 /* ===================================================
-   TEMA BUTONU & MOBİL MENÜ ÇAKIŞMA DÜZELTMELERİ
+   MOBİL MENÜ (AÇILIR ÇEKMECE) KESİN DÜZELTME
    =================================================== */
+@media (max-width: 768px) {
+  /* Menüyü taşıyan açılır konteyner */
+  .nav-links,
+  .nav-menu,
+  nav ul,
+  .sidebar,
+  .dropdown-menu {
+    position: fixed !important;
+    top: 60px !important;
+    right: 16px !important;
+    width: 220px !important;
+    height: auto !important;
+    max-height: 85vh !important;
+    overflow-y: auto !important;
+    background: #ffffff !important;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.2), 0 8px 10px -6px rgba(0, 0, 0, 0.2) !important;
+    border: 1px solid rgba(0, 0, 0, 0.08) !important;
+    border-radius: 12px !important;
+    padding: 16px 12px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+    z-index: 99999 !important;
+  }
 
+  /* Menü içerisindeki her bir link */
+  .nav-links a,
+  .nav-menu a,
+  nav ul li a,
+  .sidebar a {
+    display: block !important;
+    width: 100% !important;
+    padding: 10px 14px !important;
+    color: #1e293b !important; /* Okunaklı koyu gri/lacivert font */
+    font-size: 15px !important;
+    font-weight: 500 !important;
+    text-decoration: none !important;
+    border-radius: 8px !important;
+    transition: background 0.2s ease !important;
+  }
+
+  .nav-links a:hover,
+  nav ul li a:hover {
+    background-color: #f1f5f9 !important;
+  }
+
+  /* Koyu temada (dark mode) menü kutusu */
+  [data-theme="dark"] .nav-links,
+  [data-theme="dark"] nav ul,
+  body.dark-theme .nav-links,
+  body.dark-theme nav ul {
+    background: #1e293b !important;
+    border-color: #334155 !important;
+  }
+
+  [data-theme="dark"] .nav-links a,
+  [data-theme="dark"] nav ul li a,
+  body.dark-theme .nav-links a,
+  body.dark-theme nav ul li a {
+    color: #f8fafc !important;
+  }
+}
 /* 1. Tema Değiştirme (Güneş/Ay) İkonunu Ortala */
 .theme-toggle,
 #theme-toggle,
@@ -732,30 +793,4 @@ button.theme-toggle {
 .theme-btn svg {
   display: block !important;
   margin: auto !important;
-}
-
-/* 2. Mobil Ekranda Menü Üst Boşluğu ve Çakışmayı Önleme */
-@media (max-width: 768px) {
-  /* Header katmanını içeriğin üstünde tut */
-  .site-header,
-  header {
-    position: relative;
-    z-index: 1000 !important;
-  }
-
-  /* Menü açıldığında veya mobilde ana başlıkla çakışmaması için Hero alanına nefes payı ver */
-  .hero-section,
-  .hero,
-  main section:first-of-type {
-    padding-top: 5rem !important;
-    position: relative;
-    z-index: 1 !important;
-  }
-
-  /* Menü listesi arka planını opaklaştırarak alttaki yazıları göstermesini engelle */
-  .nav-menu,
-  .nav-links,
-  nav ul {
-    background-color: #0b1120 !important; /* Koyu arka plan */
-  }
 }
