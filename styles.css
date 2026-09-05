@@ -712,12 +712,12 @@ body {
   }
 }
 /* ===================================================
-   TEMA BUTONU VE MOBİL MENÜ KESİN ÇÖZÜM PAKETİ
+   TEMA BUTONU VE MOBİL MENÜ KESİN ÇÖZÜM
    =================================================== */
 
 /* 1. Tema Değiştirme Butonunu ve İkonları Tam Ortala */
 .theme-toggle {
-  display: flex !important;
+  display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
   padding: 0 !important;
@@ -738,48 +738,57 @@ body {
   margin: auto !important;
 }
 
-/* 2. Mobil Ekranlar İçin Menü ve Karartma Perdesi */
-@media (max-width: 768px) {
-  /* Karartma perdesi (menü açılınca arkadaki içeriği netleştirir) */
-  .nav-backdrop.is-active,
-  .nav-backdrop:not(.hidden) {
-    display: block !important;
+/* 2. 1100px Altı Mobil ve Tablet Ekranlar İçin Menü */
+@media (max-width: 1100px) {
+  /* Karartma perdesi (menü açılınca) */
+  .nav-backdrop {
     position: fixed !important;
     inset: 0 !important;
     background: rgba(15, 23, 42, 0.6) !important;
-    backdrop-filter: blur(4px) !important;
-    z-index: 998 !important;
+    backdrop-filter: blur(5px) !important;
+    -webkit-backdrop-filter: blur(5px) !important;
+    z-index: 9990 !important;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease !important;
   }
 
-  /* Menü varsayılan haldeyken gizli kalsın */
+  .nav-backdrop.is-visible {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+  }
+
+  /* Menü kapalıyken gizli olsun */
   nav.site-nav {
-    display: none;
+    display: none !important;
   }
 
-  /* Butona basılıp menü açıldığında görünen beyaz kart */
-  nav.site-nav.is-open,
-  nav.site-nav.active,
-  nav.site-nav:not([hidden]):not(.hidden) {
+  /* Menü tıklandığında (is-open sınıfı geldiğinde) */
+  nav.site-nav.is-open {
     display: flex !important;
     flex-direction: column !important;
     position: fixed !important;
-    top: 70px !important;
+    top: 72px !important;
     right: 16px !important;
-    width: 230px !important;
+    width: 220px !important;
+    max-width: calc(100vw - 32px) !important;
     height: auto !important;
     max-height: 80vh !important;
     overflow-y: auto !important;
     background-color: #ffffff !important;
-    border-radius: 12px !important;
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25) !important;
-    border: 1px solid rgba(0, 0, 0, 0.1) !important;
-    padding: 12px !important;
-    gap: 6px !important;
-    z-index: 9999 !important;
+    border-radius: 14px !important;
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.25) !important;
+    border: 1px solid rgba(0, 0, 0, 0.08) !important;
+    padding: 10px !important;
+    gap: 4px !important;
+    z-index: 99999 !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
   }
 
-  /* Menü içindeki link butonları */
-  nav.site-nav a {
+  /* Menü linkleri */
+  nav.site-nav.is-open a {
     display: block !important;
     color: #0f172a !important;
     font-size: 15px !important;
@@ -788,30 +797,29 @@ body {
     border-radius: 8px !important;
     text-decoration: none !important;
     background: transparent !important;
+    text-align: left !important;
   }
 
-  nav.site-nav a:hover {
+  nav.site-nav.is-open a:hover,
+  nav.site-nav.is-open a:active {
     background-color: #f1f5f9 !important;
+    color: #2563eb !important;
   }
 
-  /* Dark mod aktifken açılan menü renkleri */
-  [data-theme="dark"] nav.site-nav.is-open,
-  [data-theme="dark"] nav.site-nav.active,
-  body.dark-theme nav.site-nav.is-open,
-  body.dark nav.site-nav.is-open {
+  /* Koyu mod (dark mode) renkleri */
+  [data-theme="dark"] nav.site-nav.is-open {
     background-color: #1e293b !important;
     border-color: #334155 !important;
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5) !important;
   }
 
-  [data-theme="dark"] nav.site-nav a,
-  body.dark-theme nav.site-nav a,
-  body.dark nav.site-nav a {
+  [data-theme="dark"] nav.site-nav.is-open a {
     color: #f8fafc !important;
   }
 
-  [data-theme="dark"] nav.site-nav a:hover,
-  body.dark-theme nav.site-nav a:hover,
-  body.dark nav.site-nav a:hover {
+  [data-theme="dark"] nav.site-nav.is-open a:hover,
+  [data-theme="dark"] nav.site-nav.is-open a:active {
     background-color: #334155 !important;
+    color: #60a5fa !important;
   }
 }
