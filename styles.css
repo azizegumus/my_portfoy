@@ -77,7 +77,8 @@ body {
   padding: 1.25rem 2rem;
   background: rgba(248, 250, 252, 0.85);
   backdrop-filter: blur(12px);
-  z-index: 100;
+  -webkit-backdrop-filter: blur(12px);
+  z-index: 1000;
   transition: all var(--transition-speed);
   border-bottom: 1px solid transparent;
 }
@@ -123,24 +124,42 @@ body {
 .header-actions {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 0.75rem;
+  position: relative;
+  z-index: 1001;
 }
 
+/* Tema Butonu & Ortalama */
 .theme-toggle, .nav-toggle {
   background: var(--bg-subtle);
   border: 1px solid var(--border-color);
   color: var(--text-main);
-  padding: 0.5rem;
+  padding: 0;
+  width: 40px;
+  height: 40px;
   border-radius: 8px;
   cursor: pointer;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   transition: all var(--transition-speed);
 }
 
-.theme-toggle:hover {
+.theme-toggle:hover, .nav-toggle:hover {
   border-color: var(--accent-color);
+}
+
+.theme-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.theme-icon svg {
+  display: block;
+  margin: auto;
 }
 
 .theme-icon--sun { display: none; }
@@ -152,16 +171,31 @@ body {
 .nav-toggle {
   display: none;
   flex-direction: column;
-  gap: 4px;
-  width: 36px;
-  height: 36px;
+  gap: 5px;
+  padding: 9px;
 }
 
 .nav-toggle span {
-  width: 18px;
+  width: 20px;
   height: 2px;
   background-color: var(--text-main);
   transition: transform var(--transition-speed);
+}
+
+/* Perde (Backdrop) */
+.nav-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.45);
+  z-index: 998;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+.nav-backdrop.is-visible {
+  opacity: 1;
+  pointer-events: auto;
 }
 
 /* HERO SECTION */
@@ -670,7 +704,7 @@ body {
   transform: translateY(0);
 }
 
-/* Responsive */
+/* Responsive & Mobile Menü */
 @media (max-width: 960px) {
   .hero {
     grid-template-columns: 1fr;
@@ -695,139 +729,32 @@ body {
   .nav-toggle {
     display: flex;
   }
+
+  /* Mobil Menü (Sağdan kayan sidebar drawer) */
   .site-nav {
     position: fixed;
     top: 0;
     right: -100%;
     bottom: 0;
-    width: 260px;
+    width: 280px;
     background: var(--bg-surface);
     flex-direction: column;
-    padding: 6rem 2rem;
-    box-shadow: -10px 0 30px rgba(0,0,0,0.1);
-    transition: right 0.3s ease;
+    padding: 5rem 1.75rem 2rem;
+    gap: 1.25rem;
+    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.2);
+    transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 999;
+    visibility: hidden;
   }
+
   .site-nav.is-open {
     right: 0;
-  }
-}
-/* ===================================================
-   TEMA BUTONU VE MOBİL MENÜ KESİN ÇÖZÜM
-   =================================================== */
-
-/* 1. Tema Değiştirme Butonu ve İkonlar */
-.theme-toggle {
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  padding: 0 !important;
-  width: 40px !important;
-  height: 40px !important;
-}
-
-.theme-toggle .theme-icon {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  width: 100% !important;
-  height: 100% !important;
-}
-
-.theme-toggle svg {
-  display: block !important;
-  margin: auto !important;
-}
-
-/* 2. Mobil Menü ve Perde */
-@media (max-width: 1100px) {
-  /* Header'ın menüyü kesmesini engelle */
-  .site-header {
-    overflow: visible !important;
-    z-index: 10000 !important;
+    visibility: visible;
   }
 
-  /* Perde */
-  .nav-backdrop {
-    position: fixed !important;
-    inset: 0 !important;
-    background: rgba(15, 23, 42, 0.5) !important;
-    z-index: 9990 !important;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.2s ease !important;
-  }
-
-  .nav-backdrop.is-visible {
-    opacity: 1 !important;
-    pointer-events: auto !important;
-  }
-
-  /* Menü kapalıyken */
-  nav.site-nav {
-    display: none !important;
-  }
-
-  /* Menü açıldığında: Boyutlar ve taşmalar zorunlu açıldı */
-  nav.site-nav.is-open {
-    display: flex !important;
-    flex-direction: column !important;
-    position: fixed !important;
-    top: 70px !important;
-    right: 16px !important;
-    width: 220px !important;
-    min-height: auto !important;
-    height: auto !important;
-    max-height: 85vh !important;
-    overflow-y: auto !important;
-    overflow-x: hidden !important;
-    background-color: #ffffff !important;
-    border-radius: 12px !important;
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25) !important;
-    border: 1px solid rgba(0, 0, 0, 0.1) !important;
-    padding: 12px 8px !important;
-    gap: 4px !important;
-    z-index: 99999 !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-    transform: none !important;
-  }
-
-  /* Menü içindeki linkler zorunlu görünür yapıldı */
-  nav.site-nav.is-open a {
-    display: block !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-    color: #0f172a !important;
-    font-size: 15px !important;
-    font-weight: 600 !important;
-    padding: 10px 14px !important;
-    border-radius: 8px !important;
-    text-decoration: none !important;
-    background: transparent !important;
-    text-align: left !important;
-    height: auto !important;
-    line-height: 1.4 !important;
-  }
-
-  nav.site-nav.is-open a:hover,
-  nav.site-nav.is-open a:active {
-    background-color: #f1f5f9 !important;
-    color: #2563eb !important;
-  }
-
-  /* Dark mode */
-  [data-theme="dark"] nav.site-nav.is-open {
-    background-color: #1e293b !important;
-    border-color: #334155 !important;
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5) !important;
-  }
-
-  [data-theme="dark"] nav.site-nav.is-open a {
-    color: #f8fafc !important;
-  }
-
-  [data-theme="dark"] nav.site-nav.is-open a:hover {
-    background-color: #334155 !important;
-    color: #60a5fa !important;
+  .site-nav a {
+    font-size: 1.15rem;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--border-color);
   }
 }
