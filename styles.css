@@ -711,86 +711,93 @@ body {
     right: 0;
   }
 }
-/* ===================================================
-   MOBİL MENÜ (AÇILIR ÇEKMECE) KESİN DÜZELTME
-   =================================================== */
+
+/* 1. Tema Butonu ve Güneş İkonunu Tam Ortala */
+.theme-toggle {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 !important;
+  width: 40px !important;
+  height: 40px !important;
+}
+
+.theme-toggle .theme-icon {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.theme-toggle svg {
+  display: block !important;
+  margin: auto !important;
+}
+
+/* 2. Mobil Ekran için Site-Nav Düzeltmesi */
 @media (max-width: 768px) {
-  /* Menüyü taşıyan açılır konteyner */
-  .nav-links,
-  .nav-menu,
-  nav ul,
-  .sidebar,
-  .dropdown-menu {
+  /* Menü arkasındaki karartma perdesi */
+  .nav-backdrop:not(.hidden) {
+    display: block !important;
     position: fixed !important;
-    top: 60px !important;
+    inset: 0 !important;
+    background: rgba(0, 0, 0, 0.5) !important;
+    backdrop-filter: blur(4px) !important;
+    z-index: 998 !important;
+  }
+
+  /* Açılan Menü Kutusu */
+  nav.site-nav,
+  #site-nav {
+    position: fixed !important;
+    top: 70px !important;
     right: 16px !important;
     width: 220px !important;
     height: auto !important;
-    max-height: 85vh !important;
+    max-height: 80vh !important;
     overflow-y: auto !important;
     background: #ffffff !important;
-    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.2), 0 8px 10px -6px rgba(0, 0, 0, 0.2) !important;
-    border: 1px solid rgba(0, 0, 0, 0.08) !important;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2) !important;
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
     border-radius: 12px !important;
-    padding: 16px 12px !important;
+    padding: 12px !important;
     display: flex !important;
     flex-direction: column !important;
-    gap: 8px !important;
-    z-index: 99999 !important;
+    gap: 4px !important;
+    z-index: 9999 !important;
   }
 
-  /* Menü içerisindeki her bir link */
-  .nav-links a,
-  .nav-menu a,
-  nav ul li a,
-  .sidebar a {
+  /* Menü içindeki linkler */
+  nav.site-nav a,
+  #site-nav a {
     display: block !important;
     width: 100% !important;
     padding: 10px 14px !important;
-    color: #1e293b !important; /* Okunaklı koyu gri/lacivert font */
+    color: #0f172a !important; /* Net koyu renk */
     font-size: 15px !important;
     font-weight: 500 !important;
     text-decoration: none !important;
     border-radius: 8px !important;
-    transition: background 0.2s ease !important;
+    background: transparent !important;
   }
 
-  .nav-links a:hover,
-  nav ul li a:hover {
+  nav.site-nav a:hover,
+  #site-nav a:hover {
     background-color: #f1f5f9 !important;
   }
 
-  /* Koyu temada (dark mode) menü kutusu */
-  [data-theme="dark"] .nav-links,
-  [data-theme="dark"] nav ul,
-  body.dark-theme .nav-links,
-  body.dark-theme nav ul {
+  /* Dark mod aktifken menü renkleri */
+  [data-theme="dark"] nav.site-nav,
+  body.dark nav.site-nav,
+  body.dark-theme nav.site-nav {
     background: #1e293b !important;
     border-color: #334155 !important;
   }
 
-  [data-theme="dark"] .nav-links a,
-  [data-theme="dark"] nav ul li a,
-  body.dark-theme .nav-links a,
-  body.dark-theme nav ul li a {
+  [data-theme="dark"] nav.site-nav a,
+  body.dark nav.site-nav a,
+  body.dark-theme nav.site-nav a {
     color: #f8fafc !important;
   }
-}
-/* 1. Tema Değiştirme (Güneş/Ay) İkonunu Ortala */
-.theme-toggle,
-#theme-toggle,
-.theme-btn,
-button.theme-toggle {
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  padding: 0 !important;
-  line-height: 1 !important;
-}
-
-.theme-toggle svg,
-#theme-toggle svg,
-.theme-btn svg {
-  display: block !important;
-  margin: auto !important;
 }
