@@ -730,31 +730,58 @@ body {
     display: flex;
   }
 
-  /* Mobil Menü (Sağdan kayan sidebar drawer) */
+  /* Sayfanın kalanını karartan dış perde */
+  .nav-backdrop.is-visible {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    background: rgba(0, 0, 0, 0.6) !important;
+  }
+
+  /* Mobil Menü: %100 Katı, Opak ve Ekran Boyu Sağ Çekmece */
   .site-nav {
-    position: fixed;
-    top: 0;
-    right: -100%;
-    bottom: 0;
-    width: 280px;
-    background: var(--bg-surface);
-    flex-direction: column;
-    padding: 5rem 1.75rem 2rem;
-    gap: 1.25rem;
-    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.2);
-    transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    z-index: 999;
+    position: fixed !important;
+    top: 0 !important;
+    right: -100% !important;
+    bottom: 0 !important;
+    height: 100vh !important;
+    width: 280px !important;
+    max-width: 85vw !important;
+    background-color: #ffffff !important; /* Arkasını asla göstermeyen katı beyaz */
+    opacity: 1 !important;
+    flex-direction: column !important;
+    padding: 6rem 1.75rem 2rem !important;
+    gap: 1rem !important;
+    box-shadow: -10px 0 40px rgba(0, 0, 0, 0.4) !important;
+    transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    z-index: 99999 !important;
     visibility: hidden;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch;
   }
 
+  /* Menü açıldığında */
   .site-nav.is-open {
-    right: 0;
-    visibility: visible;
+    right: 0 !important;
+    visibility: visible !important;
   }
 
+  /* Menü içi linkler */
   .site-nav a {
-    font-size: 1.15rem;
-    padding: 0.5rem 0;
-    border-bottom: 1px solid var(--border-color);
+    font-size: 1.15rem !important;
+    font-weight: 600 !important;
+    color: #0f172a !important;
+    padding: 0.75rem 0 !important;
+    border-bottom: 1px solid #e2e8f0 !important;
+    background: transparent !important;
+  }
+
+  /* Koyu Modda (Dark Mode) Menü */
+  [data-theme="dark"] .site-nav {
+    background-color: #0b0f17 !important; /* Koyu modda katı koyu lacivert */
+  }
+
+  [data-theme="dark"] .site-nav a {
+    color: #f8fafc !important;
+    border-bottom-color: #1e293b !important;
   }
 }
