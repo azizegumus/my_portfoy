@@ -785,7 +785,7 @@ body {
     border-bottom-color: #1e293b !important;
   }
 }
-/* Tema Butonu & İkon Hizalama */
+/* Tema Butonu & İkon Hizalama (Tek İkon Görünür) */
 button.theme-toggle {
   display: inline-flex !important;
   align-items: center !important;
@@ -793,16 +793,28 @@ button.theme-toggle {
   padding: 0 !important;
   width: 40px !important;
   height: 40px !important;
-  position: relative !important;
 }
 
-button.theme-toggle .theme-icon {
-  display: flex !important;
+/* Varsayılan olarak Güneşi gizle, Ayı göster ve ortala */
+.theme-icon--sun {
+  display: none !important;
+}
+
+.theme-icon--moon {
+  display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
-  width: 100% !important;
-  height: 100% !important;
-  line-height: 0 !important;
+}
+
+/* Dark mod aktifken Ayı gizle, Güneşi göster ve ortala */
+[data-theme="dark"] .theme-icon--moon {
+  display: none !important;
+}
+
+[data-theme="dark"] .theme-icon--sun {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
 }
 
 button.theme-toggle svg {
